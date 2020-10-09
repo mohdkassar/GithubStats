@@ -47,7 +47,7 @@ router.get("/", function (req, res) {
           };
         });
 
-        res.json(obj);
+        res.status(200).json(obj);
       })
       .catch(function (error) {
         if (error.response.status == 422)
@@ -89,7 +89,7 @@ router.get("/:name", function (req, res) {
           }
         }
 
-        res.json({ data: { Repositories: repos } });
+        res.status(200).json({ data: { Repositories: repos } });
       })
       .catch(function (error) {
         if (error.response.status == 422)
