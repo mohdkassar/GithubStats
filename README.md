@@ -21,6 +21,7 @@ Request Body Parameters:
 <table class="humanColumnApiDescription markdown formalTheme">
 <tr><td colspan="1"><strong>Name</strong><td colspan="1"><strong>Type</strong><td colspan="1"><strong>Description</strong></td></tr>
 <tr><td style="padding-right: 40px; width: 140px;">date</td><td>DateTime</td> <td>Returns the repositories that were created after the date specified. </td></tr>
+  <tr><td style="padding-right: 40px; width: 140px;">before</td><td>Boolean</td> <td>If true, returns the repositories that were created before the date specified. </td></tr>
 </table>
 
 + Request (application/json)
