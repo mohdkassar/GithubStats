@@ -14,6 +14,7 @@ If the server is restarted everything returns to the initial configuration (12 e
 
 ### Running the software
 
+* Runs on PORT 8080.
 * ```node server.js``` for simple setups.
 
 ### API Endpoints
