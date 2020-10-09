@@ -16,8 +16,12 @@ If the server is restarted everything returns to the initial configuration (12 e
 
 * ```node server.js``` for simple setups.
 
-# API Endpoints
+### API Endpoints
 
 ```
 GET http://localhost:8080/languages         //gets the languages used by the most popular repositeries with their corresponding repository names and description
 GET http://localhost:8080/languages/Python // gets the most popular repositeries that use the language provided in the url
+```
+
+### Testing the API
+Test your API using [Postman](https://chrome.google.com/webstore/detail/postman-rest-client-packa/fhbjgbiflinjbdggehcddcbncdddomop)
