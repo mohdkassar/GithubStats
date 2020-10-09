@@ -9,7 +9,7 @@ If the server is restarted everything returns to the initial configuration (12 e
 
 ### Installation
 
-1.  Go to the project's root directory **cd /my/path/to/directory**
+1.  Go to the project's root directory
 2.  Run **npm install**
 
 ### Running the software
