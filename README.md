@@ -27,7 +27,8 @@ Request Body Parameters:
 + Request (application/json)
 
                 {
-                "date": "2020-10-01"
+                "date": "2020-10-01",
+                "before":true
                 }
 ```
 GET http://localhost:8080/languages                 //gets the languages used by the most popular repositories with their corresponding repository names and description
