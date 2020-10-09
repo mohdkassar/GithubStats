@@ -17,10 +17,20 @@ If the server is restarted everything returns to the initial configuration (12 e
 * ```node server.js``` for simple setups.
 
 ### API Endpoints
+Request Body Parameters:
+<table class="humanColumnApiDescription markdown formalTheme">
+<tr><td colspan="1"><strong>Name</strong><td colspan="1"><strong>Type</strong><td colspan="1"><strong>Description</strong></td></tr>
+<tr><td style="padding-right: 40px; width: 140px;">date</td><td>DateTime</td> <td>Returns the repositries that were created after the date specified. </td></tr>
+</table>
 
++ Request (application/json)
+
+                {
+                "date": "2020-10-01"
+                }
 ```
-GET http://localhost:8080/languages         //gets the languages used by the most popular repositeries with their corresponding repository names and description
-GET http://localhost:8080/languages/Python // gets the most popular repositeries that use the language provided in the url
+GET http://localhost:8080/languages                 //gets the languages used by the most popular repositeries with their corresponding repository names and description
+GET http://localhost:8080/languages/:LanguageName  // gets the most popular repositeries that use the language provided in the url
 ```
 
 ### Testing the API
