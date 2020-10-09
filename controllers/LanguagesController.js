@@ -10,12 +10,19 @@ router.use(bodyParser.json());
 // GETS THE MOST POPULAR LANGUAGES
 router.get("/", function (req, res) {
   var userDate = new moment(req.body.date);
+  var dateCharacter = ">";
+  if (req.body.before) {
+    dateCharacter = "<";
+  } else {
+    dateCharacter = ">";
+  }
   if (moment.now() < userDate)
     res.status(400).json({ message: "Please provide an earlier date." });
   else {
     axios
       .get(
-        "https://api.github.com/search/repositories?q=created:>" +
+        "https://api.github.com/search/repositories?q=created:" +
+          dateCharacter +
           req.body.date +
           "&sort=stars&order=desc?page=1&per_page=100"
       )
@@ -63,22 +70,26 @@ router.get("/", function (req, res) {
 router.get("/:name", function (req, res) {
   var lang = req.params.name;
   var userDate = new moment(req.body.date);
+  var dateCharacter = ">";
+  if (req.body.before) {
+    dateCharacter = "<";
+  } else {
+    dateCharacter = ">";
+  }
   if (moment.now() < userDate)
     res.status(400).json({ message: "Please provide an earlier date." });
   else {
     axios
       .get(
-        "https://api.github.com/search/repositories?q=created:>" +
+        "https://api.github.com/search/repositories?q=created:" +
+          dateCharacter +
           req.body.date +
           "&sort=stars&order=desc?page=1&per_page=100"
       )
       .then(function (response) {
         let repos = [];
         for (var i = 0; i < response.data.items.length; i++) {
-          console.log(i);
-
           var itemLang = response.data.items[i].language;
-          console.log(itemLang);
           if (itemLang != null) {
             if (lang.toLowerCase() == itemLang.toLowerCase()) {
               repos.push({
