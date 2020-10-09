@@ -7,16 +7,16 @@ var moment = require("moment");
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
-// GETS A SINGLE USER FROM THE DATABASE
-router.get("/:date", function (req, res) {
-  var userDate = new moment(req.params.date);
+// GETS THE MOST POPULAR LANGUAGES
+router.get("/", function (req, res) {
+  var userDate = new moment(req.body.date);
   if (moment.now() < userDate)
     res.status(400).json({ message: "Please provide an earlier date." });
   else {
     axios
       .get(
         "https://api.github.com/search/repositories?q=created:>" +
-          req.params.date +
+          req.body.date +
           "&sort=stars&order=desc?page=1&per_page=100"
       )
       .then(function (response) {
@@ -48,6 +48,48 @@ router.get("/:date", function (req, res) {
         });
 
         res.json(obj);
+      })
+      .catch(function (error) {
+        if (error.response.status == 422)
+          res
+            .status(400)
+            .json({ message: "Please provide correct date format" });
+        console.log(error);
+      });
+  }
+});
+
+// GETS THE MOST POPULAR REPOSITORIES USING A SPECIFIED LANGUAGE
+router.get("/:name", function (req, res) {
+  var lang = req.params.name;
+  var userDate = new moment(req.body.date);
+  if (moment.now() < userDate)
+    res.status(400).json({ message: "Please provide an earlier date." });
+  else {
+    axios
+      .get(
+        "https://api.github.com/search/repositories?q=created:>" +
+          req.body.date +
+          "&sort=stars&order=desc?page=1&per_page=100"
+      )
+      .then(function (response) {
+        let repos = [];
+        for (var i = 0; i < response.data.items.length; i++) {
+          console.log(i);
+
+          var itemLang = response.data.items[i].language;
+          console.log(itemLang);
+          if (itemLang != null) {
+            if (lang.toLowerCase() == itemLang.toLowerCase()) {
+              repos.push({
+                name: response.data.items[i].name,
+                description: response.data.items[i].description,
+              });
+            }
+          }
+        }
+
+        res.json({ data: { Repositories: repos } });
       })
       .catch(function (error) {
         if (error.response.status == 422)
